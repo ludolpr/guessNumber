@@ -1,23 +1,141 @@
 // creation des élements
-let h1 = document.createElement("h1")
-let p = document.createElement("p")
-let newInput = document.createElement("input")
-let newBtn1 = document.createElement("button")
+let h1 = document.createElement("h1");
+let p = document.createElement("p");
+let p2 = document.createElement("p");
+let input = document.createElement("input");
+let btn = document.createElement("button");
+let p3 = document.createElement("p");
+let h2 = document.createElement("h2");
+// selectionner les elementes + ajout d'un attribut
+btn.setAttribute("id", "click");
+h2.setAttribute("id", "timer");
+// btn.setAttribute("class", "jeannne")
 
-// génèrer un chiffre aléatoire
-// Recuperer la valeur dans l'input lors du click btn
 // Comparer le chiffre de l'input et le chiffre random
 // Bonus: Ajouter le focus ,Reset = et le Keypress enter.
-// Nombre de tentative et systeme de vie, check la valeur en entrée !=NULL (  0 < input > 100)  
+// Nombre de tentative et systeme de vie, check la valeur en entrée !=NULL (  0 < input > 100)
+const plus = function (numJoueur) {
+  p3.innerHTML = `${numJoueur} c'est plus !`;
+};
+const moins = function (numJoueur) {
+  p3.innerHTML = `${numJoueur} c'est moins !`;
+};
 
+// sortie des elements dans le html
 h1.innerHTML = "Guess Members";
-p.innerHTML= "";
-
+p.innerHTML = "C'est le jeu du c'est plus c'est moins !!! A vous de jouer !! ";
+p2.innerHTML = " Le nombres est entre 0 et 10 000.";
+input.innerHTML = "";
+btn.innerHTML = "Envoyer";
+h2.innerHTML = "Go !";
 
 // Variable body = document.body
 let body = document.body;
 
-
 // Gestion des Enfants par rapport au Body
-body.appendChild(h1)
-body.appendChild(p)
+body.appendChild(h1);
+body.appendChild(p);
+body.appendChild(p2);
+body.appendChild(input);
+body.appendChild(btn);
+body.appendChild(p3);
+body.appendChild(h2);
+
+// timer
+const departMinutes = 1.5;
+let temps = departMinutes * 60;
+let checktime = false;
+
+const timerElement = document.getElementById("timer");
+function startTimer (){
+
+  
+  setInterval(() => {
+    if (temps === 0 && checktime == false) {
+    checktime = true;
+    alert("perdu");
+    location.reload();
+  } else if (temps !== 0) {
+    temps = temps <= 0 ? 0 : temps - 1;
+    let minutes = parseInt(temps / 60, 10);
+    let secondes = parseInt(temps % 60, 10);
+    
+    // console.log("min", minutes, "se", secondes);
+    
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    secondes = secondes < 10 ? "0" + secondes : secondes;
+    
+    timerElement.innerText = `${minutes}:${secondes}`;
+    console.log(temps);
+  }
+}, 1000);
+}
+// génèrer un chiffre aléatoire
+function getRandom(max) {
+  return Math.round(Math.random() * max);
+}
+let output = getRandom(10000);
+// console.log("chiffre aleatoire " + output);
+let minutes = parseInt(temps / 60, 10);
+let secondes = parseInt(temps % 60, 10);
+let started = false
+// Recuperer la valeur dans l'input lors du click btn
+document.getElementById("click").onclick = function () {
+  outputNumbers();
+};
+function outputNumbers() {
+  let numJoueur = input.value;
+
+// ici
+// input.focus()
+let btn = document.querySelector("button");
+
+document.body.addEventListener("keydown", (e) =>{
+  if (e.key == "Enter") {
+    btn.innerHTML;
+  }
+  if (e.key == "Enter" && e.shiftKey) {
+   btn.innerHTML;
+  }
+});
+btn.addEventListener("click", () => {
+  
+  //Trigger Eneter key Press
+  const keyEvent = new KeyboardEvent("keydown", { key: "Enter"});
+  
+  //Trigger Eneter + Shift key Press
+  // const keyEvent = new KeyboardEvent("keydown", { key: "Enter", shiftKey: true });
+  document.body.dispatchEvent(keyEvent);
+});
+
+
+
+  console.log(numJoueur);
+  // document.getElementById("click").innerHTML = "test"
+  if (numJoueur < 0 || numJoueur > 10000) {
+    alert("la valeur est superieur ou inferieur au règles du jeu ");
+  }else{
+    checkNumber(numJoueur);
+    
+    console.log('check',started);
+    if(started === false){
+      started = true
+      startTimer()
+    }
+  }
+}
+
+function checkNumber(numJoueur) {
+  // console.log("moi : " + numJoueur);
+  //   console.log("ordi : " + output);
+
+  if (numJoueur < output) {
+    plus(numJoueur);
+  } else if (numJoueur > output) {
+    moins(numJoueur);
+  } else {
+    alert("Vous avez gagné !! bravo");
+    location.reload();
+  }
+}
+
