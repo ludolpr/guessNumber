@@ -9,6 +9,8 @@ let h2 = document.createElement("h2");
 // selectionner les elementes + ajout d'un attribut
 btn.setAttribute("id", "click");
 h2.setAttribute("id", "timer");
+input.setAttribute("id","input");
+input.setAttribute("type","number")
 // btn.setAttribute("class", "jeannne")
 
 // Comparer le chiffre de l'input et le chiffre random
@@ -83,31 +85,25 @@ let started = false
 document.getElementById("click").onclick = function () {
   outputNumbers();
 };
+
+document.getElementById("input")
+    .addEventListener("keydown", function(e) {
+      console.log("ff");
+        if (e.keyCode === 13) {
+            document.getElementById("click").click();
+        }
+        
+    });
 function outputNumbers() {
   let numJoueur = input.value;
 
 // ici
-// input.focus()
-let btn = document.querySelector("button");
 
-document.body.addEventListener("keydown", (e) =>{
-  if (e.key == "Enter") {
-    btn.innerHTML;
-  }
-  if (e.key == "Enter" && e.shiftKey) {
-   btn.innerHTML;
-  }
-});
-btn.addEventListener("click", () => {
-  
-  //Trigger Eneter key Press
-  const keyEvent = new KeyboardEvent("keydown", { key: "Enter"});
-  
-  //Trigger Eneter + Shift key Press
-  // const keyEvent = new KeyboardEvent("keydown", { key: "Enter", shiftKey: true });
-  document.body.dispatchEvent(keyEvent);
-});
 
+
+
+// focus de mon input
+document.getElementById('input').focus();
 
 
   console.log(numJoueur);
