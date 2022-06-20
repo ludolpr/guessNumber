@@ -13,9 +13,7 @@ input.setAttribute("id","input");
 input.setAttribute("type","number")
 // btn.setAttribute("class", "jeannne")
 
-// Comparer le chiffre de l'input et le chiffre random
-// Bonus: Ajouter le focus ,Reset = et le Keypress enter.
-// Nombre de tentative et systeme de vie, check la valeur en entrée !=NULL (  0 < input > 100)
+// plus et moins
 const plus = function (numJoueur) {
   p3.innerHTML = `${numJoueur} c'est plus !`;
 };
@@ -97,7 +95,6 @@ document.getElementById("input")
 function outputNumbers() {
   let numJoueur = input.value;
 
-// ici
 
 
 
